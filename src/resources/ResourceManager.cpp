@@ -110,14 +110,15 @@ void ResourceManager::loadFile(string path)
     XMLCh tempStr[100];
     XMLString::transcode("LS", tempStr, 99);
     DOMImplementation *impl = DOMImplementationRegistry::getDOMImplementation(tempStr);
-    DOMBuilder* parser = ((DOMImplementationLS*)impl)->createDOMBuilder(DOMImplementationLS::MODE_SYNCHRONOUS, 0);
+    DOMLSParser* parser = ((DOMImplementationLS*)impl)->createLSParser(DOMImplementationLS::MODE_SYNCHRONOUS, 0);
 
     cout << path << endl;
 
-    if (parser->canSetFeature(XMLUni::fgDOMValidation, true))
-        parser->setFeature(XMLUni::fgDOMValidation, true);
-    if (parser->canSetFeature(XMLUni::fgDOMWhitespaceInElementContent, false))
-        parser->setFeature(XMLUni::fgDOMWhitespaceInElementContent, false);
+    if (parser->getDomConfig()->canSetParameter(XMLUni::fgDOMValidate, true))
+      parser->getDomConfig()->setParameter(XMLUni::fgDOMValidate, true);
+    if (parser->getDomConfig()->canSetParameter(XMLUni::fgDOMElementContentWhitespace, false))
+      parser->getDomConfig()->setParameter(XMLUni::fgDOMElementContentWhitespace, false);
+
 
     // lets see if we can read this thing...
     try
