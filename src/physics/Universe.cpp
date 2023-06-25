@@ -16,11 +16,11 @@ typedef unsigned int uint;
 
 const float Gc = 1.0;  //Wildly inaccurate gravitational constant.
 
-pair<vector<Vector3D>*,map<int,int>*> 
+pair<vector<Vector3D>*,map<int,int>*>
 Universe::getCurrentState()
 {
-    
-    //This will return a list of 
+
+    //This will return a list of
     // gravity pairs in the form position,velocity
     // Then in will return following that a list with
     // pairs position, velocity, angular momentum, current direction forward,
@@ -30,9 +30,9 @@ Universe::getCurrentState()
     map<int,int> * ret_map = new map<int,int>();
     uint i;
     for(i = 0; i < gravitational_objects.size(); i++)
-    { 
-        //If you change the order here, change the offset and below.
-        //If you change the number change the state_stride.
+    {
+	//If you change the order here, change the offset and below.
+	//If you change the number change the state_stride.
 	ret_value->push_back(gravitational_objects[i]->getLocation());
 	ret_value->push_back(gravitational_objects[i]->getVelocityVec());
 	(*ret_map)[gravitational_objects[i]->getID()] = i;
@@ -75,7 +75,7 @@ void Universe::applyCurrentState(vector<Vector3D> * state,map<int,int>* id_map)
 }
 
 
-void Universe::getDerivatives(const vector<Vector3D> * currentState, 
+void Universe::getDerivatives(const vector<Vector3D> * currentState,
 			      const float currentTime,
 			      vector<Vector3D> * derivatives,
 			      map<int,int> * currentMap)
@@ -86,28 +86,28 @@ void Universe::getDerivatives(const vector<Vector3D> * currentState,
 	int id = p->first;
 	int index = p->second;
 	Object * object = getObject(id);
-	
+
 	Vector3D total_acceleration; //= Vector(0,0,0)
 	for(uint j = 0; j < gravitational_objects.size(); j++) {
-	    total_acceleration += 
+	    total_acceleration +=
 		getAcceleration(currentState->at(j*state_stride+loc_offset),
 				gravitational_objects.at(j)->getMass(),
 				currentState->at(index*state_stride+loc_offset));
 	}
 	if(object->isPowered()) {
-	    total_acceleration += 
+	    total_acceleration +=
 	      object->getAcceleration(currentTime);
 	}
-	
+
 	//Set the derivative of position equal to the velocity
-	derivatives->at(index*state_stride+loc_offset) = 
+	derivatives->at(index*state_stride+loc_offset) =
 	    currentState->at(index*state_stride+vel_offset);
 	derivatives->at(index*state_stride+vel_offset) = total_acceleration;
     }
 }
 
-//getDerivatives will return the dp,dv,dL,df,dc vectors for 
-// all the vectors.  
+//getDerivatives will return the dp,dv,dL,df,dc vectors for
+// all the vectors.
 
 Vector3D Universe::getAcceleration(Vector3D mass_position, float mass,
 				   Vector3D object_position) {
@@ -118,17 +118,17 @@ Vector3D Universe::getAcceleration(Vector3D mass_position, float mass,
 	//2.  the mass and the object are about to overflow.
 	// in either case, I think we don't want a massive acceleration
 	// or maybe even an overflow.
-	return 0.0 * difference; 
+	return 0.0 * difference;
     }
-	
+
     return (mass / pow(mag,3)) * difference;
 }
 
 void getDerivatives(const vector<Vector3D>* currentState,
 		    const float currentTime,
-		    vector<Vector3D>* derivatives,void * extra) 
+		    vector<Vector3D>* derivatives,void * extra)
 {
-    pair<Universe *,map<int,int> *>* dataPair 
+    pair<Universe *,map<int,int> *>* dataPair
 	= static_cast< pair<Universe *,map<int,int>*> * >(extra);
     Universe * universe = dataPair->first;
     universe->getDerivatives(currentState,currentTime,derivatives,
@@ -148,7 +148,7 @@ void Universe::gotoNextTime(float delta_time)
 	pastState = pastStates.at(lastValidTimeIndex);
     } else {
 	//Update all old objects.
-	if(lastValidTimeIndex >= 0 && pastStates.at(lastValidTimeIndex) != null)
+	if(lastValidTimeIndex >= 0 && pastStates.at(lastValidTimeIndex) != nullptr)
 	{
 	    applyCurrentState(pastStates.at(lastValidTimeIndex),
 			      pastIDs.at(lastValidTimeIndex));
@@ -159,15 +159,15 @@ void Universe::gotoNextTime(float delta_time)
 	pastID = oldState.second;
     }
     //Does C++ null initial pointers?
-    if(pastIDs.at(nextTimeIndex) != null)
+    if(pastIDs.at(nextTimeIndex) != nullptr)
     {
 	delete pastIDs.at(nextTimeIndex);
-	pastIDs.at(nextTimeIndex) = null;
+	pastIDs.at(nextTimeIndex) = nullptr;
     }
-    if(pastStates.at(nextTimeIndex) != null)
+    if(pastStates.at(nextTimeIndex) != nullptr)
     {
 	delete pastStates.at(nextTimeIndex);
-	pastStates.at(nextTimeIndex) = null;
+	pastStates.at(nextTimeIndex) = nullptr;
     }
 
     //Give the objects a chance to update themselves, however they want.
@@ -182,10 +182,10 @@ void Universe::gotoNextTime(float delta_time)
 	}
       }
     }
-    
+
     //Update the physics model.
     vector<Vector3D> * nextState = new vector<Vector3D>(pastState->size());
-    pair<Universe *,map<int,int> *>* dataPair = 
+    pair<Universe *,map<int,int> *>* dataPair =
 	new pair<Universe *,map<int,int> *>(this,pastID);
     rk4vector(pastState, currentTime, delta_time,::getDerivatives,nextState,
 	      dataPair);
@@ -203,7 +203,7 @@ void Universe::gotoNextTime(float delta_time)
     if(delete_past_state)
     {   //Need to delete data created with getCurrentState
 	delete pastState;
-	//Note that the ids will be deleted with the 
+	//Note that the ids will be deleted with the
 	//above delete pastIDs[nextTimeIndex]
     }
 
@@ -211,7 +211,7 @@ void Universe::gotoNextTime(float delta_time)
     lastValidTimeIndex = nextTimeIndex;
     nextTimeIndex = (nextTimeIndex + 1) % number_of_past_states;
 
-    //Check for collusions.  We only care about collutions between powered 
+    //Check for collusions.  We only care about collutions between powered
     //objects and other stuff, not between other stuff and other stuff.
     for(uint i = 0; i < powered_objects.size(); i++)
     {
@@ -222,15 +222,15 @@ void Universe::gotoNextTime(float delta_time)
 	    for(uint j = 0; j < all_objects.size();j++)	{
 		int oID = all_objects.at(j)->getID();
 		if(oID != iID && hasObjectInformation(currentTime,oID)) {
-		    Vector3D other_position = 
+		    Vector3D other_position =
 			getObjectLocation(currentTime,oID);
 		    float other_radius = all_objects.at(j)->getRadius();
-		    float differenceSquared = 
+		    float differenceSquared =
 			(other_position-position).magSquared();
 		    if(pow(other_radius+iRadius,2) > differenceSquared) {
 			powered_objects.at(i)->collide(oID);
 			if(powered_objects.at(i)->getIsDead()) {
-				cout<< "Object: " << iID 
+				cout<< "Object: " << iID
 				    << " crashed into "<< oID << endl;
 				//Need to recalculate list if the object
 				//was killed
@@ -301,4 +301,3 @@ Universe::clearDeadObjects()
 	has_dead_objects = false;
     }
 }
-

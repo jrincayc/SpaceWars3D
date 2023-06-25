@@ -18,13 +18,11 @@
 #include "ODE.h"
 #include "assert.h"
 
-const int null = 0;
-
 class Universe
 {
 protected:
     //Objects that have a calculated  gravitational effect.
-    vector<Object *> gravitational_objects; 
+    vector<Object *> gravitational_objects;
 
     //List of all objects currently tracked by the physics model
     vector<Object *> all_objects;
@@ -47,7 +45,7 @@ protected:
     vector<map<int,int>*>       pastIDs;
 
     //time at a give index
-    vector<float>              pastTimes; 
+    vector<float>              pastTimes;
 
     //Map from time to index
     map<float,int>             pastTimesMap;
@@ -55,7 +53,7 @@ protected:
     int nextTimeIndex;
     int lastValidTimeIndex;
 
-    bool time_list_valid; 
+    bool time_list_valid;
     bool has_dead_objects;
 
     float currentTime;
@@ -72,17 +70,17 @@ protected:
     /*!
       @function getCurrentState
       @abstract returns a vector of the currentState.
-      @result Returns a vector that describes the current state. 
+      @result Returns a vector that describes the current state.
        and a map from object ids to object indexs in the vector.
      */
     pair<vector<Vector3D>*,map<int,int>*> getCurrentState();
 
     void applyCurrentState(vector<Vector3D>* state,map<int,int>* id_map);
 
-    void getDerivatives(const vector<Vector3D> * currentState, 
+    void getDerivatives(const vector<Vector3D> * currentState,
 			float currentTime, vector<Vector3D> * derivatives,
 			map<int,int> * currentMap);
-    
+
     friend void getDerivatives(const vector<Vector3D>* currentState,
 			       const float currentTime,
 			       vector<Vector3D>* derivatives,void * extra);
@@ -93,7 +91,7 @@ protected:
     static const int vel_offset = 1;
 
     int getObjectIndex(float time, int id) {
-        uint time_index = pastTimesMap[time];
+	uint time_index = pastTimesMap[time];
 	assert(0 <= time_index && time_index < pastTimes.size());
 	assert(pastIDs[time_index]->find(id) != pastIDs[time_index]->end());
 	int object_index = pastIDs[time_index]->find(id)->second;
@@ -110,8 +108,8 @@ public:
 	lastValidTimeIndex = -1;
 	pastStates.resize(number_of_past_states);
 	for(uint i = 0; i < pastStates.size(); i++) {
-	  pastStates[i] = null;
-	}	 
+	  pastStates[i] = nullptr;
+	}
 	pastIDs.resize(number_of_past_states);
 	pastTimes.resize(number_of_past_states);
     }
@@ -133,8 +131,8 @@ public:
 	addStandardObject(object);
     }
 
-    //Don't ever pass any function a time not gotten from 
-    // this class, unless you trust floating compare more than 
+    //Don't ever pass any function a time not gotten from
+    // this class, unless you trust floating compare more than
     // I do.
     float getLastValidTime() {
 	return pastTimes[lastValidTimeIndex];
@@ -144,7 +142,7 @@ public:
 	if(pastTimesMap.find(time) == pastTimesMap.end()) {
 	    return false;
 	}
-        uint time_index = pastTimesMap[time];
+	uint time_index = pastTimesMap[time];
 	if(pastIDs[time_index]->find(id) != pastIDs[time_index]->end()) {
 	    return true;
 	} else {
@@ -175,7 +173,7 @@ public:
 	    return true;
 	}
     }
-    
+
     void gotoNextTime(float delta_time);
     void clearDeadObjects();
 
