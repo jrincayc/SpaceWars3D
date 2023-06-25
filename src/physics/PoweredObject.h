@@ -12,11 +12,6 @@
 #include <algorithm>
 #include "Object.h"
 
-template<class T> const T& clamp(const T &low,const T &value, const T &high)
-{
-    return min(max(low,value),high);
-}
-
 
 class PoweredObject : public Object
 {
@@ -32,16 +27,16 @@ protected:
 	addAcceleration(start,end,
 			(percent/100.0)*direction);
     }
-    
+
 public:
     PoweredObject();
-    void setMaxForwardThrust(float forward_thrust) 
+    void setMaxForwardThrust(float forward_thrust)
 	{ max_forward_thrust = forward_thrust; }
     float getMaxForwardThrust() const { return max_forward_thrust; }
-    void setMaxUpThrust(float up_thrust) 
+    void setMaxUpThrust(float up_thrust)
 	{ max_up_thrust = up_thrust; }
     float getMaxUpThrust() const { return max_up_thrust; }
-    void setMaxRightThrust(float right_thrust) 
+    void setMaxRightThrust(float right_thrust)
 	{ max_right_thrust = right_thrust; }
     float getMaxRightThrust() const { return max_right_thrust; }
     void setForwardThrustPercent(float forward_thrust)
@@ -58,4 +53,3 @@ public:
 };
 
 #endif //ifndef __PoweredObject__
-
