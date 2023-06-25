@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE tags SYSTEM "tag.dtd">
+<tags>
+    <ship id="1" name="Fighter">
+        <textureLink id="9" />
+        <meshLink id="1" />
+        <yaw max="10.0" acc="0.25" />
+        <pitch max="10.0" acc="0.25" />
+        <roll max="10.0" acc="0.25" />
+        <thrust max="1000.0" acc="0.1" />
+        <verticalSlide max="500.0" acc="0.1" />
+        <horizontalSlide max="500.0" acc="0.1" />
+        <material>
+            <ambientLight red="0.2" green="0.2" blue="0.2" alpha="1.0" />
+            <diffuseLight red="1.0" green="1.0" blue="1.0" alpha="1.0" />
+            <specularLight red="0.5" green="0.5" blue="0.5" alpha="1.0" />
+            <emissionLight red="1.0" green="1.0" blue="1.0" alpha="1.0" />
+            <shininess>20</shininess>
+        </material>
+        <radius>1</radius>
+        <mass>1</mass>
+        <cockpit>
+            <meshLink id="2" />
+            <textureLink id="9" />
+        </cockpit>
+    </ship>
+</tags>

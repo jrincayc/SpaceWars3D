@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!ELEMENT tags (tag*, sun*, texture*)>
+
+<!ELEMENT mass (#PCDATA)>
+<!ELEMENT radius (#PCDATA)>
+
+<!ELEMENT link EMPTY>
+    <!ATTLIST link
+        id CDATA #REQUIRED
+        type CDATA #REQUIRED>
+        
+<!ELEMENT meshLink EMPTY>
+    <!ATTLIST meshLink
+        id CDATA #REQUIRED>
+        
+<!ELEMENT textureLink EMPTY>
+    <!ATTLIST textureLink
+        id CDATA #REQUIRED>
+
+
+<!ELEMENT location EMPTY>
+    <!ATTLIST location
+        x CDATA #REQUIRED
+        y CDATA #REQUIRED
+        z CDATA #REQUIRED>
+
+<!ELEMENT velocity EMPTY>
+    <!ATTLIST velocity
+        x CDATA #REQUIRED
+        y CDATA #REQUIRED
+        z CDATA #REQUIRED>
+        
+<!ELEMENT rotation (#PCDATA)>
+        
+<!ELEMENT forwardOrientation EMPTY>
+    <!ATTLIST forwardOrientation
+        x CDATA #REQUIRED
+        y CDATA #REQUIRED
+        z CDATA #REQUIRED>
+        
+<!ELEMENT upwardOrientation EMPTY>
+    <!ATTLIST upwardOrientation
+        x CDATA #REQUIRED
+        y CDATA #REQUIRED
+        z CDATA #REQUIRED>
+        
+<!ELEMENT texture EMPTY>
+    <!ATTLIST texture
+        id CDATA #REQUIRED
+        name CDATA #REQUIRED
+        width CDATA #REQUIRED
+        height CDATA #REQUIRED
+        path CDATA #REQUIRED>
+        
+<!ELEMENT ambientLight EMPTY>
+    <!ATTLIST ambientLight
+        red CDATA #REQUIRED
+        green CDATA #REQUIRED
+        blue CDATA #REQUIRED
+        alpha CDATA #REQUIRED>
+        
+<!ELEMENT diffuseLight EMPTY>
+    <!ATTLIST diffuseLight
+        red CDATA #REQUIRED
+        green CDATA #REQUIRED
+        blue CDATA #REQUIRED
+        alpha CDATA #REQUIRED>
+        
+<!ELEMENT specularLight EMPTY>
+    <!ATTLIST specularLight
+        red CDATA #REQUIRED
+        green CDATA #REQUIRED
+        blue CDATA #REQUIRED
+        alpha CDATA #REQUIRED>
+        
+<!ELEMENT emissionLight EMPTY>
+    <!ATTLIST emissionLight
+        red CDATA #REQUIRED
+        green CDATA #REQUIRED
+        blue CDATA #REQUIRED
+        alpha CDATA #REQUIRED>
+        
+<!ELEMENT shininess (#PCDATA)>
+        
+<!ELEMENT pointLight (location, ambientLight, diffuseLight, specularLight)>
+
+<!ELEMENT material (ambientLight, diffuseLight, specularLight, emissionLight, shininess)>
+
+<!ELEMENT v EMPTY>
+    <!ATTLIST v
+        x CDATA #REQUIRED
+        y CDATA #REQUIRED
+        z CDATA #REQUIRED
+        u CDATA #REQUIRED
+        v CDATA #REQUIRED>
+        
+<!ELEMENT t EMPTY>
+    <!ATTLIST t
+        v1 CDATA #REQUIRED
+        v2 CDATA #REQUIRED
+        v3 CDATA #REQUIRED>
+        
+<!ELEMENT mesh (v+, t+)>
+
+<!ELEMENT yaw EMPTY>
+    <!ATTLIST yaw
+        max CDATA #REQUIRED
+        acceleration CDATA #REQUIRED>
+        
+<!ELEMENT roll EMPTY>
+    <!ATTLIST roll
+        max CDATA #REQUIRED
+        acceleration CDATA #REQUIRED>
+        
+<!ELEMENT pitch EMPTY>
+    <!ATTLIST pitch
+        max CDATA #REQUIRED
+        acceleration CDATA #REQUIRED>
+        
+<!ELEMENT verticalSlide EMPTY>
+    <!ATTLIST verticalSlide
+        max CDATA #REQUIRED
+        acceleration CDATA #REQUIRED>
+        
+<!ELEMENT horizontalSlide EMPTY>
+    <!ATTLIST horizontalSlide
+        max CDATA #REQUIRED
+        acceleration CDATA #REQUIRED>
+        
+<!ELEMENT thrust EMPTY>
+    <!ATTLIST thrust
+        max CDATA #REQUIRED
+        acceleration CDATA #REQUIRED>
+        
+<!ELEMENT cockpit (meshLink, textureLink)>
+
+<!ELEMENT ship (textureLink, meshLink, yaw, roll, pitch, thrust, verticalSlide, horizontalSlide, material, radius, mass, meshLink, textureLink)>
+        
+<!ELEMENT sun (mass, radius, textureLink, pointLight, material, rotation)>
+    <!ATTLIST sun
+        id CDATA #REQUIRED
+        name CDATA #REQUIRED>
+        
+<!ELEMENT planet (mass, radius, textureLink, material, rotation)>
+    <!ATTLIST planet
+        id CDATA #REQUIRED
+        name CDATA #REQUIRED>
+        
+<!ELEMENT solarMap (gavList)>
+    <!ATTLIST solarMap
+        id CDATA #REQUIRED
+        name CDATA #REQUIRED>
+        
+<!ELEMENT gravList (gravObject+)>
+
+<!ELEMENT gravObject (link, location, velocity, forwardOrientation, upwardOrientation)>

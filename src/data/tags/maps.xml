@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE tags SYSTEM "tag.dtd">
+<tags>
+    <solarMap id="0" name="Sun with planet">
+        <gravList>
+            <gravObject>
+                <link id="0" type="sun"/>
+                <location x="0.0" y="0.0" z="0.0"/>
+                <velocity x="0.0" y="-0.05" z="0.0"/>
+                <upwardOrientation x="0.0" y="0.0" z="1.0"/>
+                <forwardOrientation x="1.0" y="0.0" z="0.0"/>
+            </gravObject>
+            <gravObject>
+                <link id="0" type="planet"/>
+                <location x="10000.0" y="0.0" z="0.0"/>
+                <velocity x="0.0" y="50.0" z="0.0"/>
+                <upwardOrientation x="0.0" y="0.0" z="1.0"/>
+                <forwardOrientation x="1.0" y="0.0" z="0.0"/>
+            </gravObject>
+        </gravList>
+    </solarMap>
+    <solarMap id="1" name="Sun with 2 planets">
+	<gravList>
+            <gravObject>
+                <link id="0" type="sun"/>
+                <location x="0.0" y="0.0" z="0.0"/>
+                <velocity x="-0.07" y="-0.05" z="0.0"/>
+                <upwardOrientation x="0.0" y="0.0" z="1.0"/>
+                <forwardOrientation x="1.0" y="0.0" z="0.0"/>
+            </gravObject>
+            <gravObject>
+                <link id="0" type="planet"/>
+                <location x="10000.0" y="0.0" z="0.0"/>
+                <velocity x="0.0" y="50.0" z="0.0"/>
+                <upwardOrientation x="0.0" y="0.0" z="1.0"/>
+                <forwardOrientation x="1.0" y="0.0" z="0.0"/>
+            </gravObject>
+            <gravObject>
+                <link id="0" type="planet"/>
+                <location x="0.0" y="20000.0" z="0.0"/>
+                <velocity x="70.0" y="0.0" z="0.0"/>
+                <upwardOrientation x="0.0" y="0.0" z="1.0"/>
+                <forwardOrientation x="1.0" y="0.0" z="0.0"/>
+            </gravObject>
+        </gravList>
+    </solarMap>
+    <solarMap id="2" name="Sun with 3 planets and a moon">
+ 	<gravList>
+            <gravObject>
+                <link id="1" type="sun"/>
+                <location x="0.0" y="0.0" z="0.0"/>
+                <velocity x="0.0" y="-5.5" z="0.0"/>
+                <upwardOrientation x="0.0" y="0.0" z="1.0"/>
+                <forwardOrientation x="1.0" y="0.0" z="0.0"/>
+            </gravObject>
+            <gravObject>
+                <link id="0" type="planet"/>
+                <location x="1000.0" y="0.0" z="0.0"/>
+                <velocity x="0.0" y="31.0" z="0.0"/>
+                <upwardOrientation x="0.0" y="0.0" z="1.0"/>
+                <forwardOrientation x="1.0" y="0.0" z="0.0"/>
+            </gravObject>
+            <gravObject>
+                <link id="0" type="planet"/>
+                <location x="5000.0" y="0.0" z="0.0"/>
+                <velocity x="0.0" y="14.0" z="0.0"/>
+                <upwardOrientation x="0.0" y="0.0" z="1.0"/>
+                <forwardOrientation x="1.0" y="0.0" z="0.0"/>
+            </gravObject>
+            <gravObject>
+                <link id="1" type="planet"/>
+                <location x="9875.0" y="0.0" z="0.0"/>
+                <velocity x="0.0" y="5.75" z="0.0"/>
+                <upwardOrientation x="0.0" y="0.0" z="1.0"/>
+                <forwardOrientation x="1.0" y="0.0" z="0.0"/>
+            </gravObject>
+            <gravObject>
+                <link id="2" type="planet"/>
+                <location x="10125.0" y="0.0" z="0.0"/>
+                <velocity x="0.0" y="22.75" z="0.0"/>
+                <upwardOrientation x="0.0" y="0.0" z="1.0"/>
+                <forwardOrientation x="1.0" y="0.0" z="0.0"/>
+            </gravObject>
+        </gravList>
+    </solarMap>
+</tags>

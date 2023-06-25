@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tags SYSTEM "tag.dtd">
+<tags>
+	<texture id="0" name="Sun Texture" width="512" height="512" path="sun.raw"/>
+	<texture id="1" name="Earth Texture" width="1024" height="512" path="earth.raw"/>
+	<texture id="2" name="Mars Texture" width="1024" height="512" path="mars.raw"/>
+	<texture id="3" name="Moon Texture" width="1024" height="512" path="moon.raw"/>
+	<texture id="4" name="Small Sun Texture" width="128" height="128" path="sun_small.raw"/>
+	<texture id="5" name="Small Earth Texture" width="128" height="128" path="earth_small.raw"/>
+	<texture id="6" name="Small Mars Texture" width="128" height="128" path="mars_small.raw"/>
+	<texture id="7" name="Small Moon Texture" width="128" height="128" path="moon_small.raw"/>
+    
+    
+	<texture id="8" name="Ship Texture" width="1024" height="512" path="ship.raw"/>
+	<texture id="9" name="Small Ship Texture" width="1" height="1" path="ship_small.raw" />
+ </tags>

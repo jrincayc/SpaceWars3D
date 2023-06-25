@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE tags SYSTEM "tag.dtd">
+<tags>
+    <planet id="0" name="Planet 1">
+        <mass>100000.0</mass>
+        <radius>100</radius>
+        <rotation>1</rotation>
+        <textureLink id="5"/>
+        <material>
+            <ambientLight red="0.4" green="0.4" blue="0.4" alpha="1.0" />
+            <diffuseLight red="1.0" green="1.0" blue="1.0" alpha="1.0" />
+            <specularLight red="0.5" green="0.5" blue="0.5" alpha="1.0" />
+            <emissionLight red="0.01" green="0.01" blue="0.01" alpha="1.0" />
+            <shininess>20</shininess>
+        </material>
+    </planet>
+    <planet id="1" name="Planet 2">
+        <mass>75000.0</mass>
+        <radius>75</radius>
+        <rotation>1</rotation>
+        <textureLink id="6"/>
+        <material>
+            <ambientLight red="0.4" green="0.4" blue="0.4" alpha="1.0" />
+            <diffuseLight red="1.0" green="1.0" blue="1.0" alpha="1.0" />
+            <specularLight red="0.5" green="0.5" blue="0.5" alpha="1.0" />
+            <emissionLight red="0.0" green="0.0" blue="0.0" alpha="1.0" />
+            <shininess>20</shininess>
+        </material>
+    </planet>
+    <planet id="2" name="Planet 3">
+        <mass>25000.0</mass>
+        <radius>25</radius>
+        <rotation>1</rotation>
+        <textureLink id="7"/>
+        <material>
+            <ambientLight red="0.4" green="0.4" blue="0.4" alpha="1.0" />
+            <diffuseLight red="1.0" green="1.0" blue="1.0" alpha="1.0" />
+            <specularLight red="0.5" green="0.5" blue="0.5" alpha="1.0" />
+            <emissionLight red="0.0" green="0.0" blue="0.0" alpha="1.0" />
+            <shininess>20</shininess>
+        </material>
+    </planet>
+</tags>
