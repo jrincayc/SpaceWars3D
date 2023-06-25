@@ -27,29 +27,29 @@ protected:
     float       fmass;
     float       fIxx,fIyy,fIzz,fIxy,fIyz,fIzx;//Components of inertial tensor
     float       finertial_determinant;//Determinate of inertial tensor
-    Vector3D    fwx,fwy,fwz;//dot with angular monentum to get compontents 
-    //                        of anglular velocity 
-	
+    Vector3D    fwx,fwy,fwz;//dot with angular monentum to get compontents
+    //                        of anglular velocity
+
     int         fID; //Unique id of the object.
     void reinitializeInertialTensor();
     bool       powered;
     bool       gravitational;
     bool       isDead;
     static const int acceleration_list_length = 240;
-    static const float acceleration_delta = 1.0/60.0;
+    static constexpr float acceleration_delta = 1.0/60.0;
     vector<Vector3D> acceleration_list;
     int lowest_pointer;
     float highest_acceleration_time;
     //To get lowest value, take delta_mult*acceleration_delta
-    int delta_mult; 
+    int delta_mult;
 
-    Vector3D getUnrolledAcceleration(int index) const { 
-	return acceleration_list[(index + lowest_pointer) 
+    Vector3D getUnrolledAcceleration(int index) const {
+	return acceleration_list[(index + lowest_pointer)
 				 % acceleration_list_length];
     }
 
-    void  setUnrolledAcceleration(int index, Vector3D vector) { 
-	acceleration_list[(index + lowest_pointer) 
+    void  setUnrolledAcceleration(int index, Vector3D vector) {
+	acceleration_list[(index + lowest_pointer)
 			  % acceleration_list_length] = vector;
     }
 
@@ -68,8 +68,8 @@ public:
     virtual ~Object();
 
     Vector3D getAcceleration(float time) const {
-	if(!powered || time > highest_acceleration_time 
-	   || time < delta_mult*acceleration_delta) 
+	if(!powered || time > highest_acceleration_time
+	   || time < delta_mult*acceleration_delta)
 	{
 	    return Vector3D();//zero vector
 	} else {
@@ -89,8 +89,8 @@ public:
     void setUpwardOrientation(const Vector3D &v);
     void setLocation(const Vector3D &p) {fLocation = p;}
     void setInertialTensor(float fIxx, float fIyy,float fIzz,
-			   float fIxy,float fIyz,float fIzx) 
-	    { 
+			   float fIxy,float fIyz,float fIzx)
+	    {
 		    this->fIxx = fIxx; this->fIyy = fIyy; this->fIzz = fIzz;
 		    this->fIxy = fIxy; this->fIyz = fIyz; this->fIzx = fIzx;
 		    reinitializeInertialTensor();	    }
@@ -116,7 +116,7 @@ public:
     void yaw(float angle) {rotate(getUpwardOrientation(),angle);}
     void roll(float angle) { rotate(getForwardOrientation(),angle);}
     void pitch(float angle) {rotate(getRightOrientation(),angle); }
-    
+
     Quaternion getRotation() {return base_q;}
 
 };
