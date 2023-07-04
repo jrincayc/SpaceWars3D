@@ -10,7 +10,11 @@
 #include "Ship.h"
 #include "ShipInput.h"
 #include "PlayerInput.h"
-#include <SDL/SDL.h>
+#ifdef __APPLE__
+    #include <SDL.h>
+#else
+    #include <SDL/SDL.h>
+#endif
 #include <stdio.h>
 #include <iostream>
 #include <vector>

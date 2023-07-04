@@ -40,7 +40,7 @@ public:
 	{ max_right_thrust = right_thrust; }
     float getMaxRightThrust() const { return max_right_thrust; }
     void setForwardThrustPercent(float forward_thrust)
-	{ forward_thrust_percent = clamp(-100.0f,forward_thrust,100.0f); }
+	{ forward_thrust_percent = std::clamp(-100.0f,forward_thrust,100.0f); }
     float getForwardThrustPercent() const { return forward_thrust_percent; }
     void setUpThrustPercent(float up_thrust)
 	{ up_thrust_percent = clamp(-100.0f,up_thrust,100.0f); }

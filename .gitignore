@@ -1,0 +1,4 @@
+*.o
+src/app/spacewars3d
+.vscode
+
