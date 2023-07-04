@@ -1,4 +1,3 @@
-
 #include "Canvas.h"
 #include "Camera.h"
 #include "GLHeaders.h"
@@ -40,7 +39,7 @@ int main(int argc, char *argv[])
 {
     Uint32		prevTicks;
     Uint32		newTicks;
-    Uint32      	currentSlice = 0;
+    Uint32		currentSlice = 0;
     Uint32		diffTicks;
     bool		lastViewToggle = false;
 
@@ -49,7 +48,7 @@ int main(int argc, char *argv[])
     bool fullscreen = false;
     int default_map = -1;
     int default_ship = -1;
-    
+
     for(int i = 1; i < argc; i++) {
 	if (! strcmp(argv[i],"-1")) {
 	    width = 640;
@@ -70,12 +69,12 @@ int main(int argc, char *argv[])
 	    fullscreen = true;
 	}
     }
-	    
-    
+
+
     initSDL(width,height,fullscreen);
     initOpenGL();
     initManagers();
-    
+
     setupUniverse(default_map,default_ship);
     setupKeys();
 
@@ -83,50 +82,50 @@ int main(int argc, char *argv[])
     gSpeed = 0.001;
     while(1)
     {
-        if(gExit)
-        {
-            SDL_Quit();
-            exit(0);
-        }
-        currentSlice++;
-        newTicks = SDL_GetTicks();
-        diffTicks = newTicks - prevTicks;
-        if(diffTicks < kMinTime)
-        {
-            SDL_Delay(kMinTime - diffTicks);
+	if(gExit)
+	{
+	    SDL_Quit();
+	    exit(0);
+	}
+	currentSlice++;
+	newTicks = SDL_GetTicks();
+	diffTicks = newTicks - prevTicks;
+	if(diffTicks < kMinTime)
+	{
+	    SDL_Delay(kMinTime - diffTicks);
 	    newTicks = SDL_GetTicks();
 	    diffTicks = newTicks - prevTicks;
-        }
-        PlayerInput::getSharedInput()->processEvents(gSpeed * diffTicks * .0625, diffTicks / 1000.0);
-        gShipInput->update();
-        gCanvas->getUniverse()->gotoNextTime(gSpeed * diffTicks * .0625);
-        if(currentSlice % 100 == 0)
-        {
-            gCanvas->getUniverse()->clearDeadObjects();
-        }
-        if(gToggleView != lastViewToggle)
-        {
-            lastViewToggle = gToggleView;
-            gCanvas->getCamera()->setChaseObjectID(gShip->getID());
-            gCanvas->getCamera()->setMode(gCanvas->getCamera()->getMode() + 1);
-        }
-        gCanvas->draw();
-        prevTicks = newTicks;
+	}
+	PlayerInput::getSharedInput()->processEvents(gSpeed * diffTicks * .0625, diffTicks / 1000.0);
+	gShipInput->update();
+	gCanvas->getUniverse()->gotoNextTime(gSpeed * diffTicks * .0625);
+	if(currentSlice % 100 == 0)
+	{
+	    gCanvas->getUniverse()->clearDeadObjects();
+	}
+	if(gToggleView != lastViewToggle)
+	{
+	    lastViewToggle = gToggleView;
+	    gCanvas->getCamera()->setChaseObjectID(gShip->getID());
+	    gCanvas->getCamera()->setMode(gCanvas->getCamera()->getMode() + 1);
+	}
+	gCanvas->draw();
+	prevTicks = newTicks;
     }
 }
 
 void initSDL(int width, int height, bool fullscreen)
 {
-    const SDL_VideoInfo* info = NULL;
+    const SDL_VideoInfo* info = nullptr;
     int extra_flags = 0;
-    if(fullscreen) 
+    if(fullscreen)
     {
 	extra_flags |= SDL_FULLSCREEN;
     }
     if(SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-        cerr << "Failed to init SDL: " << SDL_GetError() << endl;
-        exit(1);
+	cerr << "Failed to init SDL: " << SDL_GetError() << endl;
+	exit(1);
     }
 
     SDL_EnableUNICODE(1);
@@ -142,7 +141,7 @@ void initSDL(int width, int height, bool fullscreen)
 
     if(SDL_SetVideoMode(width, height, 32, SDL_OPENGL | extra_flags) == 0)
     {
-        cerr << "Failed to set up the prefered SDL video mode: " 
+	cerr << "Failed to set up the prefered SDL video mode: "
 	     << SDL_GetError() << endl;
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
@@ -151,9 +150,9 @@ void initSDL(int width, int height, bool fullscreen)
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-	if(SDL_SetVideoMode(width, height, 16, SDL_OPENGL | extra_flags) == 0) 
-	{ 
-	    cerr << "Failed to set up fallback SDL video mode: " 
+	if(SDL_SetVideoMode(width, height, 16, SDL_OPENGL | extra_flags) == 0)
+	{
+	    cerr << "Failed to set up fallback SDL video mode: "
 		 << SDL_GetError() << endl;
 
 	    exit(1);
@@ -182,7 +181,7 @@ void initOpenGL()
     // turn on vertex arrays
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    
+
     glBlendFunc(GL_SRC_ALPHA,GL_ONE);
 }
 
@@ -190,15 +189,15 @@ void initManagers()
 {
     try
     {
-        XMLPlatformUtils::Initialize();
+	XMLPlatformUtils::Initialize();
     }
     catch (const XMLException& toCatch)
     {
-        char* message = XMLString::transcode(toCatch.getMessage());
-        cout << "Error during initialization! :\n"
-            << message << "\n";
-        XMLString::release(&message);
-        exit(1);
+	char* message = XMLString::transcode(toCatch.getMessage());
+	cout << "Error during initialization! :\n"
+	    << message << "\n";
+	XMLString::release(&message);
+	exit(1);
     }
 
 
@@ -209,7 +208,7 @@ void initManagers()
 
 void setupUniverse(int default_map, int default_ship)
 {
-    Universe 			*universe = new Universe();
+    Universe			*universe = new Universe();
     ResourceManager		*resManager = ResourceManager::getSharedManager();
     vector<Resource*>	*resList = resManager->getResourcesOfType(kSolarMapType);
     SolarMap			*map;
@@ -218,32 +217,32 @@ void setupUniverse(int default_map, int default_ship)
 
     if(resList->size() == 0)
     {
-        cerr << "Hmm... we have no solar maps to load." << endl;
-        exit(0);
+	cerr << "Hmm... we have no solar maps to load." << endl;
+	exit(0);
     }
     else if(resList->size() == 1)
     {
-        map = (SolarMap*)(*resList)[0];
+	map = (SolarMap*)(*resList)[0];
     }
-    else if(default_map >= 0 && (uint)default_map < resList->size()) 
+    else if(default_map >= 0 && (uint)default_map < resList->size())
     {
 	map = (SolarMap*)resList->at(default_map);
     }
     else
     {
-        cout << "Select Map:" << endl;
-        for(unsigned int i = 0; i < resList->size(); i++)
-        {
-            cout << "\t" << i << ")" << (*resList)[i]->getName() << endl;
-        }
-        cout << "Enter Selection: ";
-        cin >> index;
-        if(index >= resList->size() || index < 0)
-        {
-            cerr << "Invalid Input" << endl;
-            exit(1);
-        }
-        map = (SolarMap*)(*resList)[index];
+	cout << "Select Map:" << endl;
+	for(unsigned int i = 0; i < resList->size(); i++)
+	{
+	    cout << "\t" << i << ")" << (*resList)[i]->getName() << endl;
+	}
+	cout << "Enter Selection: ";
+	cin >> index;
+	if(index >= resList->size() || index < 0)
+	{
+	    cerr << "Invalid Input" << endl;
+	    exit(1);
+	}
+	map = (SolarMap*)(*resList)[index];
     }
 
     map->populateUniverse(universe);
@@ -252,32 +251,32 @@ void setupUniverse(int default_map, int default_ship)
     resList = resManager->getResourcesOfType(kShipType);
     if(resList->size() == 0)
     {
-        cerr << "Sorry, we have no ships for you to fly." << endl;
-        exit(0);
+	cerr << "Sorry, we have no ships for you to fly." << endl;
+	exit(0);
     }
     else if(resList->size() == 1)
     {
-        ship = (ShipObject*)(*resList)[0]->createObject();
+	ship = (ShipObject*)(*resList)[0]->createObject();
     }
-    else if(default_ship >= 0 && (uint)default_ship < resList->size()) 
+    else if(default_ship >= 0 && (uint)default_ship < resList->size())
     {
 	ship = (ShipObject*)resList->at(default_ship)->createObject();
     }
     else
     {
-        cout << "Select your ship:" << endl;
-        for(unsigned int i = 0; i < resList->size(); i++)
-        {
-            cout << "\t" << i << ")" << (*resList)[i]->getName() << endl;
-        }
-        cout << "Enter Selection: ";
-        cin >> index;
-        if(index >= resList->size() || index < 0)
-        {
-            cerr << "Invalid Input" << endl;
-            exit(1);
-        }
-        ship = (ShipObject*)(*resList)[index]->createObject();
+	cout << "Select your ship:" << endl;
+	for(unsigned int i = 0; i < resList->size(); i++)
+	{
+	    cout << "\t" << i << ")" << (*resList)[i]->getName() << endl;
+	}
+	cout << "Enter Selection: ";
+	cin >> index;
+	if(index >= resList->size() || index < 0)
+	{
+	    cerr << "Invalid Input" << endl;
+	    exit(1);
+	}
+	ship = (ShipObject*)(*resList)[index]->createObject();
     }
 
     ship->setLocation(Vector3D(-3000, 0, 0));
@@ -287,9 +286,9 @@ void setupUniverse(int default_map, int default_ship)
 
     gShipInput = new ShipInput();
     gShipInput->setShip(ship);
-    
+
     gSpeed = 0.05;
-    
+
     gCanvas = new Canvas();
     gCanvas->getCamera()->setShape(40, 640.0/480.0);
     gCanvas->getCamera()->setNear(1);
